@@ -1,16 +1,19 @@
-import React from "react";
-import Form from './components/Form';
-import { Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
+import React, { useState } from 'react';
+import { Route } from 'react-router-dom';
+import Header from './components/Header';
+import Confirmation from './components/Confirmation';
+import Pizza from './components/Pizza';
+import Home from './components/Home'; 
 
-const App = () => {
-  return (
-   <>
-    <Switch>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/Pizza' component={Form} />
-    </Switch>
-   </>
+export default function App() {
+  const [placeOrder, setPlaceOrder] = useState({})
+
+  return(
+    <>
+    <Header />
+    <Route path='/' exact component={Home} />
+    <Route path='/pizza' component={() => <Pizza setPlaceOrder={setPlaceOrder} />}/>
+    <Route path='/confirmation' component={() => <Confirmation placeOrder={placeOrder}/>}/>
+    </>
   );
 };
-export default App;
